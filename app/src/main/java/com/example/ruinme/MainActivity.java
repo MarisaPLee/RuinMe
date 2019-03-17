@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
         final Button butt = findViewById(R.id.ruinme_button);
+        final Button butt2 = findViewById(R.id.accessibility_button);
         butt.setTag(0);
         butt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,8 +78,23 @@ public class MainActivity extends AppCompatActivity {
 
                 v.setTag(++presses);
                 butt.setText(String.format(Locale.getDefault(), "ruin me %d", presses));
+                if(presses == 20)
+                {
+                    butt2.setVisibility(View.VISIBLE);
+                }
             }
         });
+
+
+
+        butt2.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+                     startActivityForResult(intent, REQUEST_CODE);
+                 }
+         }
+        );
     }
 
     @Override

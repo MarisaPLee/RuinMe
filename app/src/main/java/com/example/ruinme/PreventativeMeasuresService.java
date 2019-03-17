@@ -1,26 +1,30 @@
 package com.example.ruinme;
 
 import android.app.Activity;
+import android.app.Service;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.app.IntentService;
 
-public class PreventativeMeasuresActivity extends Activity {
+public class PreventativeMeasuresService extends IntentService {
 
-    WindowManager windowManager;
-
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d("PreventativeMeasuresActivity","starting");
+    public PreventativeMeasuresService() {
+        super("PreventativeMeasuresService");
     }
+    WindowManager windowManager;
+    FrameLayout screenLayout;
 
-    protected void onStart() {
-        super.onStart();
+    @Override
+    protected void onHandleIntent(Intent i) {
+        Log.d("PreventativeMeasuresService","starting");
         windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-
+        screenLayout = new FrameLayout(this);
         WindowManager.LayoutParams params = new WindowManager.LayoutParams();
         params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         params.width = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -28,7 +32,8 @@ public class PreventativeMeasuresActivity extends Activity {
         params.gravity = Gravity.START | Gravity.TOP;
 
         LayoutInflater factory = LayoutInflater.from(this);
-        View myView = factory.inflate(R.layout.preventative_measures, null);
+        View myView = factory.inflate(R.layout.preventative_measures, screenLayout);
         windowManager.addView(myView, params);
     }
+
 }

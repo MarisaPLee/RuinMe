@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">RuinMe</string>
     <string name="ruin_me">ruin me</string>
+    <string name="accessibility_button">I don\'t feel ruined enough</string>
 </resources>

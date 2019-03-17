@@ -2,7 +2,10 @@ package com.example.ruinme;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
@@ -11,7 +14,13 @@ import java.util.Set;
 
 public class PermissionTracker {
 
+    public final static int REQUEST_CODE = 123;
+
     public static void requestPermissions(Activity act) {
+        if (!Settings.canDrawOverlays(act)) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + act.getPackageName()));
+            act.startActivityForResult(intent, REQUEST_CODE);
+        }
         String[] ps = getPermissionSet(act, false).toArray(new String[0]);
         ActivityCompat.requestPermissions(act, ps, 0);
     }
@@ -24,6 +33,9 @@ public class PermissionTracker {
         for(String p : permissions) {
             if (ContextCompat.checkSelfPermission(act, p) == state)
                 ret.add(p);
+        }
+        if (Settings.canDrawOverlays(act)) {
+            ret.add(Manifest.permission.SYSTEM_ALERT_WINDOW);
         }
 
         return ret;

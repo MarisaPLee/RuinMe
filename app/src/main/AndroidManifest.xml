@@ -89,6 +89,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".PreventativeMeasuresActivity"/>
+
         <service android:name=".ExploitService" />
 
         <receiver
